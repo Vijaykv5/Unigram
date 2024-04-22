@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const signup = require("./routes/signup");
 const UserCreatePost = require("./routes/createpost");
+const Isloggedin = require("./routes/login");
 const connectDB = require("./db");
 
 const app = express();
@@ -14,10 +15,9 @@ app.use(express.json());
 
 connectDB();
 
-
-
 app.use(signup);
 app.use(UserCreatePost);
+app.use(Isloggedin);
 app.use(require("./routes/getpost"));
 
 const PORT = 3002;

@@ -35,6 +35,7 @@ const Signup = () => {
         localStorage.setItem("user", JSON.stringify(formData));
         console.log("Data sent successfully");
         navigateTo("/Home");
+        
       } else {
         console.error("Failed to send Details");
       }
@@ -134,7 +135,7 @@ const Signup = () => {
               </button>
               <div className="mt-4 text-center text-sm">
                 Already have an account?
-                <a className="underline" href="#">
+                <a className="underline" href="/login">
                   Login
                 </a>
               </div>

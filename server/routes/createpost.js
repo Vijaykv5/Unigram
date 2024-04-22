@@ -2,34 +2,31 @@ const express = require("express");
 const router = express.Router();
 const UserCreatePost = require("../models/userCreatePost");
 
-const UserCreatedPost = async (req, res) => {
+const createUserPost = async (req, res) => {
   try {
-    // Extract description and images from the request body
-    const { user_id, description, images } = req.body;
-    console.log(req.body);
+    const { userid, description, images, username, keyword } = req.body; // Retrieve user_id, description, and images from request body
 
-    // Here you may need to process the images array to store them properly in your database
-    // For simplicity, let's assume you're storing them as an array of strings
-    // You can store them in your database according to your schema
+    // Create user post in the database
+    const userCreatedPost = await UserCreatePost.create({
 
-    // Create a new user created post document
-    const usercreatedPosts = await UserCreatePost.create({
-      user_id,
+      userid,
+      username,
       description,
       images,
+      keyword
     });
+      console.log(req.body);
 
-    // Send a success response
-    res.status(201).json({ usercreatedPosts });
-    console.log("User created successfully:", usercreatedPosts);
+    // Respond with the created user post
+    res.status(201).json({ userCreatedPost });
+    console.log("User created successfully:", userCreatedPost);
   } catch (error) {
-    // Handle any errors
-    console.log(req.body);
     console.error("Error creating user:", error);
     res.status(500).json({ error: error.message });
   }
 };
 
-router.post("/home", UserCreatedPost);
+// POST route for creating user posts
+router.post("/home", createUserPost);
 
 module.exports = router;
