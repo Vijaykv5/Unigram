@@ -6,6 +6,7 @@ import Signup from "./components/Signup";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Profile from "./components/profile/Profile";
+import Rankings from "./components/MainChannels/rankings";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/usersList" element={<Sample2 />} />
         <Route path="/profile/:userId" element={<Profile />} />
+        <Route path="/rankings"  element={<Rankings/>} />
       </Routes>
     </Router>
   );

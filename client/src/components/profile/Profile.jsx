@@ -1,34 +1,93 @@
-// Profile.js
-
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import FeedPost from "../FeedPost";
+import { BiUpvote } from "react-icons/bi";
+import { FaRegComment } from "react-icons/fa";
 
 const Profile = () => {
-  const { userId } = useParams(); 
-  console.log(userId);// Get userId from URL parameter
-
-  const [userDetails, setUserDetails] = useState(null);
+  const { userId } = useParams();
+  const [userPosts, setUserPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch user details from API based on userId
-    fetch(`/user/${userId}`)
-      .then((response) => response.json())
-      .then((data) => setUserDetails(data))
-      .catch((error) => console.error("Error fetching user details:", error));
+    const fetchUserPosts = async () => {
+      try {
+        const response = await fetch(`http://localhost:3002/profile/${userId}`);
+        if (response.ok) {
+          const data = await response.json();
+          setUserPosts(data);
+        } else {
+          console.error("Failed to fetch user posts");
+        }
+      } catch (error) {
+        console.error("Error: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUserPosts();
   }, [userId]);
+
+  console.log(userPosts);
 
   return (
     <div>
-      <h2>User Profile</h2>
-      {userDetails ? (
-        <div>
-          <p>User ID: {userDetails.user_id}</p>
-          <p>Name: {userDetails.name}</p>
-          <p>Email: {userDetails.email}</p>
+      <h1 className="text-3xl font-bold mb-4">User Posts</h1>
+      {userPosts.map((post) => (
+        <div
+          key={post._id}
+          className="post  mx-56 w- bg-white hover:bg-gray-50 rounded-lg shadow-md mb-4"
+        >
+          <div className="post-header flex items-center p-4">
+            <img
+              src="https://randomuser.me/api/portraits/men/35.jpg" // Assuming you have a default profile picture
+              alt="Profile Picture"
+              className="profile-picture w-10 h-10 rounded-full mr-4"
+            />
+            <div className="post-info">
+              <h3 className="post-author text-lg font-bold">{post.username}</h3>
+              <p className="post-time text-gray-600">
+                {new Date(post.dateTime).toLocaleString()}
+              </p>
+            </div>
+          </div>
+
+          <div className="post-content p-4">
+            <p>{post.description}</p>
+            <div className="flex flex-wrap -mx-1 my-2">
+              {post.images &&
+                post.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`Image ${index}`}
+                    className="w-1/2 sm:w-1/4 px-1 my-1 rounded-md"
+                  />
+                ))}
+            </div>
+          </div>
+          <div className="post-actions p-4 border-t border-gray-200">
+            <button className="like-button bg-blue-400 text-white px-4 py-2 rounded-2xl mr-2">
+              <div className="flex">
+                <BiUpvote size={24} color="bg-blue-500" />
+                <span className="">{post.likes}</span>
+              </div>
+            </button>
+            <button className="comment-button bg-blue-400 text-white px-4 py-2 rounded-2xl mr-2">
+              <div className="flex">
+                <FaRegComment size={24} color="bg-blue-500" />
+                <span className="ml-1">{post.comments.length}</span>
+              </div>
+            </button>
+            {/* <a
+              href={shareLink}
+              className="share-button bg-blue-500 text-white px-4 py-2 rounded"
+            >
+              Share
+            </a> */}
+          </div>
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      ))}
     </div>
   );
 };

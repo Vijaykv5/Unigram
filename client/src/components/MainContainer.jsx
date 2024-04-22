@@ -67,6 +67,7 @@ const MainContainer = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.keyword = tags;
+    console.log(formData);
 
     try {
       const response = await fetch("http://localhost:3002/home", {
