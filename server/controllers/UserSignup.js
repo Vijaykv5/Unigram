@@ -1,6 +1,5 @@
 const User = require("../models/userDetails");
 
-// Controller function to handle user signup
 const signupUser = async (req, res) => {
   const { user_id, name, email, password } = req.body;
   try {

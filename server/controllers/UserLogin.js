@@ -12,7 +12,7 @@ const loginUser = (req, res) => {
             email: user.email,
             password: user.password,
           };
-          // Sending user details to the client
+          
           res.json({ success: true, userDetails: userDetails });
         } else {
           res

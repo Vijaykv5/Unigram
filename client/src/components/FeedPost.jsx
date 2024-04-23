@@ -20,10 +20,10 @@ const FeedPost = ({ post, updatePostLikes }) => {
   const handleLike = async () => {
     if (!liked) {
       try {
-        // Update likes in the frontend immediately
+        
         updatePostLikes(post._id, post.likes + 1);
 
-        // Update likes in the backend
+        // likes
         const response = await fetch(`http://localhost:3002/Home/${post._id}`, {
           method: "PUT",
           headers: {
@@ -34,10 +34,10 @@ const FeedPost = ({ post, updatePostLikes }) => {
 
         if (!response.ok) {
           console.error("Failed to update post likes");
-          // If update fails, revert the frontend likes
+          
           updatePostLikes(post._id, post.likes);
         } else {
-          // Mark post as liked and store its ID in sessionStorage
+          
           setLiked(true);
           const likedPosts =
             JSON.parse(sessionStorage.getItem("likedPosts")) || [];
@@ -55,25 +55,24 @@ const FeedPost = ({ post, updatePostLikes }) => {
  const handleUnlike = async () => {
   if (liked) {
     try {
-      // Update likes in the frontend immediately
+      // Update frontend likes
       updatePostLikes(post._id, post.likes - 1);
 
-      // Update likes in the backend
+     
       const response = await fetch(`http://localhost:3002/Home/${post._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ likes: post.likes - 1 }), // Decrement likes
+        body: JSON.stringify({ likes: post.likes - 1 }), 
       });
 
       if (!response.ok) {
         console.error("Failed to update post likes");
-        // If update fails, revert the frontend likes
+      
         updatePostLikes(post._id, post.likes);
       } else {
-        // Mark post as unliked and remove its ID from sessionStorage
-        setLiked(false);
+      
         const likedPosts =
           JSON.parse(sessionStorage.getItem("likedPosts")) || [];
         const updatedLikedPosts = likedPosts.filter((id) => id !== post._id);
@@ -87,26 +86,25 @@ const FeedPost = ({ post, updatePostLikes }) => {
     }
   }
 };
-console.log(post?.userid);
+console.log("post-details",post);
 
   const shareLink = `http://example.com/share/${post._id}`;
 
   return (
     <div className="post w-full bg-white hover:bg-gray-50 rounded-lg shadow-md mb-4">
       <Link to={`/profile/${post.userid}`} className="block">
-      <div className="post-header flex items-center p-4">
-        <img
-          src="https://randomuser.me/api/portraits/men/35.jpg" // Assuming you have a default profile picture
-          alt="Profile Picture"
-          className="profile-picture w-10 h-10 rounded-full mr-4"
-        />
-        <div className="post-info">
-          <h3 className="post-author text-lg font-bold">{post.username}</h3>
-          <p className="post-time text-gray-600">
-            {new Date(post.dateTime).toLocaleString()}
-          </p>
+        <div className="post-header flex items-center p-4">
+          <img
+            src={post.userimage} 
+            className="profile-picture w-11 h-11 rounded-full mr-4"
+          />
+          <div className="post-info">
+            <h3 className="post-author text-lg font-bold">{post.username}</h3>
+            <p className="post-time text-gray-600">
+              {new Date(post.dateTime).toLocaleString()}
+            </p>
+          </div>
         </div>
-      </div>
       </Link>
       <div className="post-content p-4">
         <p>{post.description}</p>

@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+  const user=JSON.parse(localStorage.getItem("user"));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 const navigateTo = useNavigate();
   const isLoggedIn = async (e) => {
     console.log(email, password)
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault(); 
 
-    // Make sure email and password are not empty
+    
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
 
     try {
-      const response = await // Assuming you're using fetch to make the API call
+      const response = await 
 fetch("http://localhost:3002/login", {
   method: "POST",
   headers: {
@@ -28,17 +29,17 @@ fetch("http://localhost:3002/login", {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      navigateTo("/Home");
+      navigateTo("/home/"+data.userDetails.user_id);
       localStorage.setItem("user", JSON.stringify(data.userDetails));
-      // Redirect or do something else
+     
     } else {
-      // Login failed, handle error
+     
       console.error(data.message);
     }
   })
   .catch(error => {
     console.error("Error logging in:", error);
-    // Handle network or other errors
+    
   });
 }
 catch (error) 

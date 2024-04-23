@@ -1,10 +1,10 @@
-// routes/posts.js
+
 
 const express = require("express");
 const router = express.Router();
 const UserCreatePost = require("../models/userCreatePost");
 
-// Route to fetch user created posts
+
 router.get("/home", async (req, res) => {
   try {
     const posts = await UserCreatePost.find().sort({ dateTime: -1 });;

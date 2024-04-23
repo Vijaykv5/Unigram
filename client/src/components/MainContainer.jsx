@@ -8,15 +8,16 @@ const MainContainer = () => {
   console.log(tags);
 
   const [formData, setFormData] = useState({
-    username: "", // Initialize with an empty string
-    userid: "", // Initialize with an empty string
+    username: "", 
+    userid: "",
+    userimage:"",
     description: "",
     images: [],
     keyword: [],
   });
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem("user_details");
     if (storedUser) {
       const user = JSON.parse(storedUser);
 
@@ -24,6 +25,7 @@ const MainContainer = () => {
         ...prevFormData,
         username: user.name,
         userid: user.user_id,
+        userimage: user.image,
       }));
     }
   }, []);
@@ -70,7 +72,7 @@ const MainContainer = () => {
     console.log(formData);
 
     try {
-      const response = await fetch("http://localhost:3002/home", {
+      const response = await fetch("http://localhost:3002/home/:id ", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

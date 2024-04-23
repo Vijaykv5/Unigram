@@ -34,7 +34,7 @@ const Signup = () => {
       if (response?.ok) {
         localStorage.setItem("user", JSON.stringify(formData));
         console.log("Data sent successfully");
-        navigateTo("/Home");
+        navigateTo("/home");
         
       } else {
         console.error("Failed to send Details");

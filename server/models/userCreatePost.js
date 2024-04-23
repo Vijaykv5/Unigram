@@ -10,6 +10,10 @@ const userCreatePostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userimage: {
+    type: String,
+    required: true,
+  },
   dateTime: {
     type: Date,
     default: Date.now,
@@ -21,7 +25,7 @@ const userCreatePostSchema = new mongoose.Schema({
   images: [String],
   keyword: {
     type: [String],
-    // required: true,
+
   },
   likes: {
     type: Number,

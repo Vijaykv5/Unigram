@@ -40,7 +40,7 @@ const Profile = () => {
         >
           <div className="post-header flex items-center p-4">
             <img
-              src="https://randomuser.me/api/portraits/men/35.jpg" // Assuming you have a default profile picture
+              src={post.userimage} 
               alt="Profile Picture"
               className="profile-picture w-10 h-10 rounded-full mr-4"
             />
