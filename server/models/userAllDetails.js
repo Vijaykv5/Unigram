@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
   },
   email: {
     type: String,
@@ -26,6 +25,14 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   semester: {
+    type: String,
+    required: true,
+  },
+  linkedin: {
+    type: String,
+    required: true,
+  },
+  github: {
     type: String,
     required: true,
   },

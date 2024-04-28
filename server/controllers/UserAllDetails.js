@@ -1,9 +1,21 @@
 const UserAllDetails = require("../models/userAllDetails");
 
 exports.createUser = async (req, res) => {
+
+
   try {
-    const { user_id, name, email, password, image, branch, semester } =
-      req.body;
+    console.log("req-body :",req.body);
+    const {
+      user_id,
+      name,
+      email,
+      password,
+      image,
+      branch,
+      semester,
+      linkedin,
+      github,
+    } = req.body;
 
     const newUser = new UserAllDetails({
       user_id,
@@ -13,6 +25,8 @@ exports.createUser = async (req, res) => {
       image,
       branch,
       semester,
+      linkedin,
+      github,
     });
 
     await newUser.save();

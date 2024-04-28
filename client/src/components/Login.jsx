@@ -1,50 +1,45 @@
 import React, { useState } from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const user=JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-const navigateTo = useNavigate();
+  const navigateTo = useNavigate();
   const isLoggedIn = async (e) => {
-    console.log(email, password)
-    e.preventDefault(); 
+    console.log(email, password);
+    e.preventDefault();
 
-    
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
 
     try {
-      const response = await 
-fetch("http://localhost:3002/login", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({ email, password }),
-})
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      navigateTo("/home/"+data.userDetails.user_id);
-      localStorage.setItem("user", JSON.stringify(data.userDetails));
-     
-    } else {
-     
-      console.error(data.message);
+      const response = await fetch("http://localhost:3002/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            navigateTo("/home/" + data.userDetails.user_id);
+            localStorage.setItem("user", JSON.stringify(data.userDetails));
+          } else {
+            console.error(data.message);
+          }
+        })
+        .catch((error) => {
+          console.error("Error logging in:", error);
+        });
+    } catch (error) {
+      console.error("Error:", error);
     }
-  })
-  .catch(error => {
-    console.error("Error logging in:", error);
-    
-  });
-}
-catch (error) 
-    { console.error("Error:", error);}
-    };
+  };
 
   return (
     <div>

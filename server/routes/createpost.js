@@ -8,7 +8,7 @@ const createUserDetails = async (req, res) => {
   console.log(req.body);  
   try {
  
-    const { user_id, name, email, image, branch, semester } =
+    const { user_id, name, email, image, branch, semester, linkedin, github } =
       req.body;
 
    
@@ -19,6 +19,8 @@ const createUserDetails = async (req, res) => {
       image,
       branch,
       semester,
+      linkedin,
+      github,
     });
 
     

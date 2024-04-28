@@ -19,7 +19,7 @@ const Navbar = () => {
         {user && (
           <>
             <Link
-              to="/home"
+              to="/home/:id"
               className="text-xl font-semibold relative after:-translate-y-1 after:absolute after:bottom-0 after:w-full after:h-1 after:bg-blue-500 after:content-'' after:opacity-0 after:transition-all after:duration-300"
             >
               Community
@@ -99,12 +99,18 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <Link to="/signup" className="text-xl text-black mr-4">
-              Sign Up
-            </Link>
-            <Link to="/login" className="text-xl text-black">
-              Sign In
-            </Link>
+            <div className="flex gap-5">
+              <Link to="/signup" className="text-xl ">
+                <div className="py-2 px-4 bg-theme rounded-md text-white">
+                  Sign Up
+                </div>
+              </Link>
+              <Link to="/login" className="text-xl text-black">
+                <div className="py-2 px-4 border border-slate-950 rounded-md ">
+                  Sign In
+                </div>
+              </Link>
+            </div>
           </>
         )}
       </div>

@@ -6,6 +6,7 @@ const Isloggedin = require("./routes/login");
 const connectDB = require("./db");
 const profilepost = require("./routes/profilepost");
 const admin = require("./routes/adminlogin");
+const UserDetails = require("./models/userAllDetails");
 
 
 const app = express();
@@ -26,6 +27,7 @@ app.use(profilepost);
 
 //admin
 app.use(admin);
+app.use(UserDetails);
 
 
 const PORT = 3002;

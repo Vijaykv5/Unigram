@@ -1,8 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 const Modal = ({ showModal, handleCloseModal, user }) => {
+
+  const { width, height } = useWindowSize();
   const navigate = useNavigate();
+  const [showConfetti, setShowConfetti] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowConfetti(false);
+    }, 5000); //adding a 5 sec for confetti
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const [formData, setFormData] = useState({
     user_id: user.user_id,
@@ -11,6 +24,8 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
     image: null,
     branch: "",
     semester: "",
+    linkedin: "",
+    github: "",
   });
   const branches = ["CSE", "ECE", "EEE", "MECH", "CIVIL", "IT", "AIDS"]; 
   const semesters = ["Semester 1", "Semester 2", "Semester 3","Semester 4","Semester 5","Semester 6","Semester 7","Semester 8"]; 
@@ -41,8 +56,15 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
   };
 
   const handleSubmit = async () => {
-    console.log("Form Data:", formData);
+    // Ensure that LinkedIn and GitHub fields are not empty
+    if (!formData.linkedin || !formData.github) {
+      console.error("LinkedIn and GitHub URLs are required");
+      return;
+    }
+
+   
     try {
+       console.log("Form Data:", formData);
       const response = await fetch("http://localhost:3002/home", {
         method: "POST",
         headers: {
@@ -58,20 +80,18 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
       const responseData = await response.json();
       console.log(responseData);
 
-      
       const { newUser } = responseData;
       const { user_id } = newUser;
 
-    
       localStorage.setItem("user_details", JSON.stringify(newUser));
 
-      
       navigate(`/home/${user_id}`);
     } catch (error) {
       console.error("Error creating user:", error.message);
       alert("Failed to create user. Please try again later.");
     }
   };
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -135,6 +155,27 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
                 ))}
               </select>
             </div>
+            <div className="mt-4">
+              <input
+                type="text"
+                name="linkedin"
+                placeholder="LinkedIn URL"
+                value={formData.linkedin}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
+            </div>
+            {/* GitHub URL input */}
+            <div className="mt-4">
+              <input
+                type="text"
+                name="github"
+                placeholder="GitHub URL"
+                value={formData.github}
+                onChange={handleChange}
+                className="border border-gray-300 rounded-md p-2 w-full"
+              />
+            </div>
             <button
               onClick={handleSubmit}
               className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
@@ -142,6 +183,7 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
               Submit
             </button>
           </div>
+          {showConfetti && <Confetti width={width} height={height} opacity={20} />}
         </div>
       )}
     </>

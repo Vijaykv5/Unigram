@@ -3,11 +3,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-    },
-    fontFamily:{
-        "Platypi": ["Platypi","serif"],
+      colors: {
+        theme: "#7BB7E3",
       },
+    },
+    fontFamily: {
+      Platypi: ["Platypi", "serif"],
+    },
   },
+
   plugins: [],
 };
 
