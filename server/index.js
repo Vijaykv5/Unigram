@@ -5,6 +5,8 @@ const UserCreatePost = require("./routes/createpost");
 const Isloggedin = require("./routes/login");
 const connectDB = require("./db");
 const profilepost = require("./routes/profilepost");
+const admin = require("./routes/adminlogin");
+
 
 const app = express();
 
@@ -21,6 +23,10 @@ app.use(UserCreatePost);
 app.use(Isloggedin);
 app.use(require("./routes/getpost"));
 app.use(profilepost);
+
+//admin
+app.use(admin);
+
 
 const PORT = 3002;
 app.listen(PORT, () => {

@@ -91,11 +91,11 @@ console.log("post-details",post);
   const shareLink = `http://example.com/share/${post._id}`;
 
   return (
-    <div className="post w-full bg-white hover:bg-gray-50 rounded-lg shadow-md mb-4">
+    <div className="post w-full bg-white hover:bg-gray-50 rounded-lg shadow-md mb-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1">
       <Link to={`/profile/${post.userid}`} className="block">
         <div className="post-header flex items-center p-4">
           <img
-            src={post.userimage} 
+            src={post.userimage}
             className="profile-picture w-11 h-11 rounded-full mr-4"
           />
           <div className="post-info">
@@ -123,8 +123,8 @@ console.log("post-details",post);
       <div className="post-actions p-4 border-t border-gray-200">
         <button
           onClick={liked ? handleUnlike : handleLike}
-          className={`like-button bg-blue-400  text-white px-4 py-2 rounded-2xl mr-2 ${
-            liked && " cursor-not-allowed bg-blue-900"
+          className={`like-button bg-blue-400 text-white px-4 py-2 rounded-2xl mr-2 ${
+            liked && "cursor-not-allowed bg-blue-900"
           }`}
           disabled={liked}
         >
@@ -140,11 +140,11 @@ console.log("post-details",post);
           </div>
         </button>
         {/* <a
-          href={shareLink}
-          className="share-button bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Share
-        </a> */}
+      href={shareLink}
+      className="share-button bg-blue-500 text-white px-4 py-2 rounded"
+    >
+      Share
+    </a> */}
       </div>
     </div>
   );
