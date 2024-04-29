@@ -57,12 +57,12 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className="bg-theme">
       <div className="flex flex-col items-center justify-center min-h-screen px-4 space-y-4 md:px-10">
         <div className="w-full max-w-[400px] space-y-4">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Sign Up</h1>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-black ">
               Enter your information to create an account
             </p>
           </div>

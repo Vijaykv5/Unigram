@@ -15,7 +15,7 @@ export const Main = () => {
           <h1 className="text-7xl font-bold  mt-4">together!</h1>
         </div>
 
-        <p className="text-lg p-7 text-gray-700">
+        <p className="text-lg p-7 text-gray-700 font-semibold">
           A closed platform for college students to engage in tech-related
           discussions, peer learning, and mentorship opportunities.
         </p>

@@ -42,12 +42,12 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="bg-theme">
       <div className="flex flex-col items-center justify-center min-h-screen px-4 space-y-4 md:px-10">
         <div className="w-full max-w-[400px] space-y-4">
           <div className="space-y-2 text-center">
             <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-black">
               Welcome back! Enter your information to login
             </p>
           </div>

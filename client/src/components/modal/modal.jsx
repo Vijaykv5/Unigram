@@ -108,8 +108,7 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
           <div className="bg-white p-8 rounded-lg">
             <h2 className="text-2xl font-bold mb-4">Welcome {user.name}!</h2>
             <p>
-              Please upload your image, select your branch, and choose a
-              semester:
+              Please upload Profile Picture
             </p>
             <div className="mt-4">
               <input

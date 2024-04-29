@@ -9,7 +9,7 @@ import { FaLinkedin } from "react-icons/fa";
 
 
 const Profile = () => {
-  const { userId } = useParams();2
+  const { userId } = useParams();
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
