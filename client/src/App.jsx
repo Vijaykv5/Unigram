@@ -10,13 +10,14 @@ import AdminLogin from "./components/admin/AdminLogin";
 import Dashboard from "./components/admin/Dashboard";
 import Rankings from "./components/MainChannels/Rankings";
 import Landing from "./Landing";
+import TrendingPage from "./components/TrendingPage";
 // import Rankings from "./components/MainChannels/rankings";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Landing/>} />
+        <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Model />} />
@@ -24,8 +25,9 @@ function App() {
         <Route path="/usersList" element={<Sample2 />} />
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/rankings" element={<Rankings/>} />
+        <Route path="/rankings" element={<Rankings />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/:channel" element={<TrendingPage/>} />
 
         {/* <Route path="/rankings"  element={<Rankings/>} /> */}
       </Routes>

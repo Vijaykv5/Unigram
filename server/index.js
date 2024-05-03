@@ -7,7 +7,7 @@ const connectDB = require("./db");
 const profilepost = require("./routes/profilepost");
 const admin = require("./routes/adminlogin");
 const UserDetails = require("./models/userAllDetails");
-
+const trending = require("./routes/trending");
 
 const app = express();
 
@@ -24,11 +24,11 @@ app.use(UserCreatePost);
 app.use(Isloggedin);
 app.use(require("./routes/getpost"));
 app.use(profilepost);
+app.use(trending);
 
 //admin
 app.use(admin);
 app.use(UserDetails);
-
 
 const PORT = 3002;
 app.listen(PORT, () => {
