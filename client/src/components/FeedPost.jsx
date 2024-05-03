@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 
+
+
+// console.log(posts)
 const FeedPost = ({ post, updatePostLikes }) => {
   const [liked, setLiked] = useState(false);
 

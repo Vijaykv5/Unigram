@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Dashboard = () => {
   // You can add state variables and functions to manage posts and channels here
 
+
+  const neew = async() => {
+
+    const admin = await fetch("http://localhost:3002/home")
+    console.log(admin)
+  }
+  neew();
+//  useEffect()=>{
+//  neew();
+//  }
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">Admin Dashboard</h1>
