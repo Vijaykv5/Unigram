@@ -11,6 +11,9 @@ const Trending = ({ channels, onChannelSelect }) => {
             onClick={() => onChannelSelect(channel)}
           >
             {channel}
+            <div className="h-0.5 bg-white my-1">
+
+            </div>
           </div>
         ))}
       </div>

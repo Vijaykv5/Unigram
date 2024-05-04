@@ -3,8 +3,7 @@ import { BiUpvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import { FaShareFromSquare } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import LeftSidebar from "./LeftSidebar";
-import RightSidebar from "./RightSidebar";
+
 
 
 

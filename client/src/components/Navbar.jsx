@@ -24,14 +24,9 @@ const Navbar = () => {
             >
               Community
             </Link>
+            
             <Link
-              to="/rankings"
-              className="text-xl font-semibold relative after:-translate-y-1 after:absolute after:bottom-0 after:w-full after:h-1 after:bg-blue-500 after:content-'' after:opacity-0 after:transition-all after:duration-300"
-            >
-              Rankings
-            </Link>
-            <Link
-              to="/Internships"
+              to="/internships"
               className="text-xl font-semibold relative after:-translate-y-1 after:absolute after:bottom-0 after:w-full after:h-1 after:bg-blue-500 after:content-'' after:opacity-0 after:transition-all after:duration-300"
             >
               Internships
