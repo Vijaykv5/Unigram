@@ -11,7 +11,7 @@ import Dashboard from "./components/admin/Dashboard";
 
 import Landing from "./Landing";
 import TrendingPage from "./components/TrendingPage";
-import Internships from "./components/MainChannels/Internships";
+import Internships from "./components/MainChannels/internships";
 
 
 function App() {

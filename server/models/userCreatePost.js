@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 
 const userCreatePostSchema = new mongoose.Schema({
-  userid:{
+  userid: {
     type: String,
     required: true,
   },
@@ -25,7 +25,6 @@ const userCreatePostSchema = new mongoose.Schema({
   images: [String],
   keyword: {
     type: [String],
-
   },
   likes: {
     type: Number,
@@ -33,8 +32,10 @@ const userCreatePostSchema = new mongoose.Schema({
   },
   comments: [
     {
-      user_id: String,
-      comment: String,
+      name: String,
+      content: String,
+      profilelink: String,
+      profileImage: String,
       dateTime: {
         type: Date,
         default: Date.now,

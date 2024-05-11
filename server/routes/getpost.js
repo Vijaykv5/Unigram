@@ -18,6 +18,7 @@ router.get("/home", async (req, res) => {
 // Route to update post likes
 router.put("/home/:postId", async (req, res) => {
   const { postId } = req.params;
+  console.log("post liked",postId);
 
   try {
     const post = await UserCreatePost.findById(postId);
@@ -59,6 +60,47 @@ router.put("/home/:postId/unlike", async (req, res) => {
     res.status(500).json({ error: "Failed to unlike user created post" });
   }
 });
+
+
+// Route to update post comments
+
+
+router.put("/home/:postId/comment", async (req, res) => {
+  const { postId } = req.params;
+  console.log("post commented",postId);
+  const { content, name, time, day, profileImage, profilelink } = req.body;
+  console.log(req.body)
+
+  try {
+    const post = await UserCreatePost.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Add new comment
+    post.comments.push({
+      name: name,
+      content: content,
+      dateTime: new Date(),
+      profileImage: profileImage,
+      profilelink: profilelink,
+    });
+
+    await post.save();
+
+    res.json({
+      message: "Comment added successfully",
+      comments: post.comments,
+    });
+  } catch (error) {
+    console.error("Error adding comment to user created post:", error);
+    res
+      .status(500)
+      .json({ error: "Failed to add comment to user created post" });
+  }
+});
+
+
 
 
 module.exports = router;
