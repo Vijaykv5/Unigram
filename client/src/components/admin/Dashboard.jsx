@@ -1,47 +1,67 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 
 const Dashboard = () => {
-  // You can add state variables and functions to manage posts and channels here
+  const [description, setDescription] = useState("");
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const neew = async() => {
+    if (!description.trim()) {
+      toast.error("Please provide a description");
+      return;
+    }
 
-    const admin = await fetch("http://localhost:3002/home")
-    console.log(admin)
-  }
-  neew();
-//  useEffect()=>{
-//  neew();
-//  }
+    try {
+      const response = await fetch("http://localhost:3002/admin/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: description }), // Corrected here
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Success:", data);
+        toast.success("Post successful");
+        setDescription(""); // Clear textarea after successful post
+      } else {
+        const errorMessage = await response.text();
+        console.error("Error:", errorMessage || response.statusText);
+        toast.error("Failed to post");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("An error occurred");
+    }
+  };
+
+  const handleChange = (e) => {
+    setDescription(e.target.value);
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Admin Dashboard</h1>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          id="description"
+          placeholder="What do you want to talk about?"
+          className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none mb-2"
+          rows="3"
+          value={description}
+          onChange={handleChange}
+          required
+        />
 
-      {/* Section for managing posts */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">Manage Posts</h2>
-        <div className="bg-white rounded-lg shadow-md p-6">
-          {/* Add functionality to manage posts here */}
-          <p className="text-gray-700">You can manage your posts here.</p>
-          <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            View Posts
-          </button>
-        </div>
-      </section>
-
-      {/* Section for managing channels */}
-      <section>
-        <h2 className="text-2xl font-bold text-gray-800 mb-4">
-          Manage Channels
-        </h2>
-        <div className="bg-white rounded-lg shadow-md p-6">
-          {/* Add functionality to manage channels here */}
-          <p className="text-gray-700">You can manage your channels here.</p>
-          <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-            View Channels
-          </button>
-        </div>
-      </section>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-2"
+        >
+          Post
+        </button>
+      </form>
+      <Toaster position="top-right" />
     </div>
   );
 };
