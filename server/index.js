@@ -8,6 +8,7 @@ const profilepost = require("./routes/profilepost");
 const admin = require("./routes/adminlogin");
 const UserDetails = require("./models/userAllDetails");
 const trending = require("./routes/trending");
+const adminPosts = require("./routes/adminpost");
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(trending);
 
 //admin
 app.use(admin);
+app.use(adminPosts);
 app.use(UserDetails);
 
 const PORT = 3002;
