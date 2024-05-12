@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: dockerfile
+    ports:
+      - "3002:3002"  # Adjust port if needed
+
+      #there is small error here as mongooose service will not run if you dont have a .env so for that you can write server dep on .env file
+
+  client:
+    build:
+      context: ./client  # Assuming client code is in a directory named 'client'
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"  # Adjust port if needed
+    depends_on:
+      - server  # Ensure client service is started first

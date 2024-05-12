@@ -1,0 +1,9 @@
+FROM node:18-alpine
+
+# Working directory be same dir
+WORKDIR /.
+#copying lock file as well as json
+COPY package*.json ./  
+RUN npm install 
+COPY . .
+CMD [ "npm", "run", "start" ]
