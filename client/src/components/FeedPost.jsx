@@ -126,7 +126,7 @@ const FeedPost = ({ post, updatePostLikes, updatePostComments }) => {
         </div>
       </Link>
       <div className="post-content p-4">
-        <p>{post.description}</p>
+        <p>{post.description.split("\r\n")}</p>
         <div className="flex flex-wrap -mx-1 my-2">
           {post.images &&
             post.images.map((image, index) => (

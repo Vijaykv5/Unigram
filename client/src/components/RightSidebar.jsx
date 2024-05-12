@@ -1,13 +1,78 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Trending from "./trending/Trending";
 import { useNavigate } from "react-router-dom";
+
 const RightSidebar = () => {
-  const navigateTo=useNavigate()
-  const channels = ["#100DaysOfCode", "#git", "#python", "#Amazon"];
-  const [selectedChannel, setSelectedChannel] = useState(channels[0]);
+  const navigateTo = useNavigate();
+  const [channels, setChannels] = useState([]);
+  const [selectedChannel, setSelectedChannel] = useState("");
+
+  useEffect(() => {
+    const fetchPostsAndExtractKeywords = async () => {
+      try {
+        const response = await fetch("http://localhost:3002/home");
+        const posts = await response.json();
+
+        let allKeywords = [];
+
+        // Collect all keywords from posts
+        posts.forEach((post) => {
+          allKeywords = allKeywords.concat(post.keyword);
+        });
+
+        // Count frequency of each keyword
+        const keywordCounts = {};
+        allKeywords.forEach((keyword) => {
+          keywordCounts[keyword] = (keywordCounts[keyword] || 0) + 1;
+        });
+
+        // Sort keywords by frequency
+        const sortedKeywords = Object.keys(keywordCounts).sort(
+          (a, b) => keywordCounts[b] - keywordCounts[a]
+        );
+
+        // Take the top 5 keywords
+        const topKeywords = sortedKeywords.slice(0, 5);
+        console.log("Top keywords:", topKeywords);
+
+        // Set channels state with the top keywords
+        setChannels(topKeywords);
+        setSelectedChannel(topKeywords[0]); // Select the first channel by default
+
+        // If the channels have equal number of keywords, sort them by the number of likes
+        const equalChannels = topKeywords.filter(
+          (keyword) => keywordCounts[keyword] === keywordCounts[topKeywords[0]]
+        );
+        if (equalChannels.length > 1) {
+          equalChannels.sort((a, b) => {
+            const likesA = posts
+              .filter((post) => post.keyword.includes(a))
+              .reduce((totalLikes, post) => totalLikes + post.likes, 0);
+            const likesB = posts
+              .filter((post) => post.keyword.includes(b))
+              .reduce((totalLikes, post) => totalLikes + post.likes, 0);
+            return likesB - likesA;
+          });
+
+          // Reorder topKeywords array based on sorted equalChannels
+          equalChannels.forEach((channel, index) => {
+            topKeywords[index] = channel;
+          });
+
+          // Update channels state with reordered topKeywords
+          setChannels([...topKeywords]);
+          setSelectedChannel(topKeywords[0]); // Select the first channel by default
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+
+    fetchPostsAndExtractKeywords();
+  }, []);
 
   const sendChannelToBackend = (channel) => {
-    // Send the selected channel to the backend
     fetch("http://localhost:3002/selected-channel", {
       method: "POST",
       headers: {
@@ -19,7 +84,6 @@ const RightSidebar = () => {
       .then((data) => {
         console.log("Response from backend:", data);
         navigateTo(`/${channel.replace("#", "")}`);
-        // If you need to handle the response from the backend, do it here
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -29,9 +93,6 @@ const RightSidebar = () => {
   const handleChannelSelect = (channel) => {
     setSelectedChannel(channel);
     sendChannelToBackend(channel);
-
-    // Redirect the user to the selected channel URL
-    // window.location.href = `/${channel.replace("#", "")}`;
   };
 
   return (
@@ -43,7 +104,11 @@ const RightSidebar = () => {
       </div>
       <div className="mt-2">
         <div>
-          <Trending channels={channels} onChannelSelect={handleChannelSelect} />
+          <Trending
+            channels={channels}
+            selectedChannel={selectedChannel}
+            onChannelSelect={handleChannelSelect}
+          />
         </div>
       </div>
     </div>
