@@ -6,9 +6,10 @@ const Isloggedin = require("./routes/login");
 const connectDB = require("./db");
 const profilepost = require("./routes/profilepost");
 const admin = require("./routes/adminlogin");
-const UserDetails = require("./models/userAllDetails");
+// const UserDetails = require("./models/userAllDetails");
 const trending = require("./routes/trending");
 const adminPosts = require("./routes/adminpost");
+const adminDashboard = require("./routes/admindashboard");
 
 const app = express();
 
@@ -30,7 +31,9 @@ app.use(trending);
 //admin
 app.use(admin);
 app.use(adminPosts);
-app.use(UserDetails);
+// app.use(UserDetails);
+app.use(adminDashboard);
+
 
 const PORT = 3002;
 app.listen(PORT, () => {

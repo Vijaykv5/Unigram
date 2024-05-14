@@ -10,7 +10,7 @@ const Trending = ({ channels, onChannelSelect }) => {
             className="py-2 px-4 m-4 cursor-pointer hover:bg-gray-700 hover:rounded-md"
             onClick={() => onChannelSelect(channel)}
           >
-            {channel}
+            #{channel}
             <div className="h-0.5 bg-white my-1">
 
             </div>

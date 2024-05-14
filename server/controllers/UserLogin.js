@@ -1,8 +1,8 @@
 const User = require("../models/userDetails");
 
-const loginUser = (req, res) => {
+const loginUser = async(req, res) => {
   const { email, password } = req.body;
-  User.findOne({ email: email })
+  await User.findOne({ email: email })
     .then((user) => {
       if (user) {
         if (user.password === password) {

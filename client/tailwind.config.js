@@ -6,6 +6,9 @@ export default {
       colors: {
         theme: "#7BB7E3",
       },
+      textDecoration: {
+        "underline-blue": "underline blue-500",
+      },
     },
     fontFamily: {
       Platypi: ["Platypi", "serif"],

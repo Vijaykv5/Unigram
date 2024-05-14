@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user_details"));
   const [showDropdown, setShowDropdown] = useState(false);
+  const location = useLocation();
 
   const toggleDropdown = () => {
     setShowDropdown((prev) => !prev);
@@ -20,14 +21,18 @@ const Navbar = () => {
           <>
             <Link
               to="/home/:id"
-              className="text-xl font-semibold relative after:-translate-y-1 after:absolute after:bottom-0 after:w-full after:h-1 after:bg-blue-500 after:content-'' after:opacity-0 after:transition-all after:duration-300"
+              className={`text-xl font-semibold ${
+                location.pathname === "/home/:id" ? "underline" : ""
+              }`}
             >
               Community
             </Link>
-            
+
             <Link
               to="/internships"
-              className="text-xl font-semibold relative after:-translate-y-1 after:absolute after:bottom-0 after:w-full after:h-1 after:bg-blue-500 after:content-'' after:opacity-0 after:transition-all after:duration-300"
+              className={`text-xl font-semibold ${
+                location.pathname === "/internships" ? "underline" : ""
+              }`}
             >
               Internships
             </Link>
@@ -73,12 +78,7 @@ const Navbar = () => {
                   >
                     Profile
                   </Link>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  >
-                    Settings
-                  </Link>
+                  
                   <Link
                     to="/signup"
                     onClick={() => {
