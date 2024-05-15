@@ -45,22 +45,12 @@ const PostContent = () => {
     setDescription(e.target.value);
   };
 
-  const handleNewChannelChange = (e) => {
-    setNewChannel(e.target.value);
-  };
-
-  const handleAddChannel = () => {
-    if (newChannel.trim() && !channels.includes(newChannel.trim())) {
-      setChannels([...channels, newChannel.trim()]);
-      setNewChannel("");
-    }
-      console.log(channels);
-  };
+ 
 
   return (
     <div>
       <div>
-        <p>Total users: {totalUsers}</p>
+       
       </div>
       <form onSubmit={handleSubmit}>
         <textarea
@@ -81,7 +71,7 @@ const PostContent = () => {
         </button>
       </form>
 
-      <div className="mt-4">
+      {/* <div className="mt-4">
         <input
           type="text"
           placeholder="Add new channel"
@@ -95,7 +85,7 @@ const PostContent = () => {
         >
           Add Channel
         </button>
-      </div>
+      </div> */}
 
       <Toaster position="top-right" />
     </div>

@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="text-white py-14 px-14 flex justify-between items-center">
+    <nav className="text-white py-14 px-14 flex justify-between    items-center">
       <div>
         <span className="text-5xl font-bold text-black">UNI</span>
         <span className="text-5xl font-bold text-[#7BB7E3]">GRAM</span>

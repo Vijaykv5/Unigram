@@ -47,12 +47,12 @@ const Dashboard = () => {
         </div>
         <div
           className={`sidebar-item flex items-center py-2 px-4 rounded ${
-            selected === "messages" && "bg-gray-700"
+            selected === "channels" && "bg-gray-700"
           }`}
-          onClick={() => handleItemClick("messages")}
+          onClick={() => handleItemClick("channels")}
         >
           <IoMdChatbubbles className="mr-2" size={24} />
-          <span>Messages</span>
+          <span>channels</span>
         </div>
         <div
           className={`sidebar-item flex items-center py-2 px-4 rounded ${
@@ -78,7 +78,7 @@ const Dashboard = () => {
       <div className="flex-1 p-4">
         {selected === "users" && <UsersContent />}
         {/* {selected === "notifications" && <NotificationsContent />} */}
-        {selected === "messages" && <MessagesContent/>}
+        {selected === "channels" && <MessagesContent/>}
         {selected === "posts" && <PostsContent />}
         {selected === "settings" && <SettingsContent />}
       </div>
