@@ -10,6 +10,7 @@ const admin = require("./routes/adminlogin");
 const trending = require("./routes/trending");
 const adminPosts = require("./routes/adminpost");
 const adminDashboard = require("./routes/admindashboard");
+const adminchannel = require("./routes/adminchannel");
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(admin);
 app.use(adminPosts);
 // app.use(UserDetails);
 app.use(adminDashboard);
+app.use(adminchannel);
 
 
 const PORT = 3002;
