@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { BiUpvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
+import Trending from "./trending/Trending";
 
 const TrendingPage = () => {
   const channel = useParams().channel;
@@ -32,6 +33,10 @@ const TrendingPage = () => {
 
   return (
     <div>
+      {/* <div>
+        <Trending />
+      </div> */}
+
       {posts.map((post, index) => (
         <div
           key={post._id}

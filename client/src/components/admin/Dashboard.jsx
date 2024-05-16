@@ -36,15 +36,7 @@ const Dashboard = () => {
           <FaUsers className="mr-2" size={24} />
           <span>Users</span>
         </div>
-        <div
-          className={`sidebar-item flex items-center py-2 px-4 rounded ${
-            selected === "notifications" && "bg-gray-700"
-          }`}
-          onClick={() => handleItemClick("notifications")}
-        >
-          <AiOutlineBell className="mr-2" size={24} />
-          <span>Notifications</span>
-        </div>
+
         <div
           className={`sidebar-item flex items-center py-2 px-4 rounded ${
             selected === "channels" && "bg-gray-700"
@@ -77,8 +69,7 @@ const Dashboard = () => {
       {/* Content */}
       <div className="flex-1 p-4">
         {selected === "users" && <UsersContent />}
-        {/* {selected === "notifications" && <NotificationsContent />} */}
-        {selected === "channels" && <MessagesContent/>}
+        {selected === "channels" && <MessagesContent />}
         {selected === "posts" && <PostsContent />}
         {selected === "settings" && <SettingsContent />}
       </div>

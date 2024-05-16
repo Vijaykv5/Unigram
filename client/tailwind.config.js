@@ -9,6 +9,9 @@ export default {
       textDecoration: {
         "underline-blue": "underline blue-500",
       },
+      animation: {
+        wiggle: "wiggle 1s ease-in-out infinite",
+      },
     },
     fontFamily: {
       Platypi: ["Platypi", "serif"],

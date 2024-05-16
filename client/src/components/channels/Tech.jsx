@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const Tech = () => {
-  // Array of channel names
   // const channels = ["Technology", "Resources", "Frontend", "Backend", "DSA", "Competitive Programming","Mini Projects","Open Source"];
 
   const [channels, setChannels] = useState([]);

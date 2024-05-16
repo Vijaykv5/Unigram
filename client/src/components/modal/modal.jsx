@@ -4,7 +4,6 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
 
 const Modal = ({ showModal, handleCloseModal, user }) => {
-
   const { width, height } = useWindowSize();
   const navigate = useNavigate();
   const [showConfetti, setShowConfetti] = useState(true);
@@ -27,8 +26,17 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
     linkedin: "",
     github: "",
   });
-  const branches = ["CSE", "ECE", "EEE", "MECH", "CIVIL", "IT", "AIDS"]; 
-  const semesters = ["Semester 1", "Semester 2", "Semester 3","Semester 4","Semester 5","Semester 6","Semester 7","Semester 8"]; 
+  const branches = ["CSE", "ECE", "EEE", "MECH", "CIVIL", "IT", "AIDS"];
+  const semesters = [
+    "Semester 1",
+    "Semester 2",
+    "Semester 3",
+    "Semester 4",
+    "Semester 5",
+    "Semester 6",
+    "Semester 7",
+    "Semester 8",
+  ];
 
   const handleImageChange = async (event) => {
     const file = event.target.files[0];
@@ -62,9 +70,8 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
       return;
     }
 
-   
     try {
-       console.log("Form Data:", formData);
+      console.log("Form Data:", formData);
       const response = await fetch("http://localhost:3002/home", {
         method: "POST",
         headers: {
@@ -92,7 +99,6 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
     }
   };
 
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -104,13 +110,40 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
   return (
     <>
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-8 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Welcome {user.name}!</h2>
-            <p>
-              Please upload Profile Picture
-            </p>
-            <div className="mt-4">
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(25, 120, 151, 0.5)",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "white",
+              padding: "2rem",
+              borderRadius: "1rem",
+              boxShadow: "0 0 20px rgba(22, 22, 22, 0.2)",
+              maxWidth: "400px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: "bold",
+                marginBottom: "1.5rem",
+                color: "#1f96b7",
+              }}
+            >
+              Welcome {user.name}!
+            </h2>
+            <p>Please upload Profile Picture</p>
+            <div style={{ marginTop: "1rem" }}>
               <input
                 type="file"
                 accept="image/*"
@@ -118,15 +151,21 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
               />
             </div>
             {formData.image && (
-              <div className="mt-4">
+              <div style={{ marginTop: "1rem" }}>
                 <img
                   src={formData.image}
                   alt="Uploaded Preview"
-                  className="rounded-full w-20 h-20"
+                  style={{
+                    borderRadius: "50%",
+                    width: "100px",
+                    height: "100px",
+                    marginTop: "1rem",
+                  }}
                 />
               </div>
             )}
-            <div className="mt-4">
+
+            <div style={{ marginTop: "1rem" }}>
               <select
                 name="branch"
                 value={formData.branch}
@@ -140,7 +179,7 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
                 ))}
               </select>
             </div>
-            <div className="mt-4">
+            <div style={{ marginTop: "1rem" }}>
               <select
                 name="semester"
                 value={formData.semester}
@@ -154,35 +193,55 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
                 ))}
               </select>
             </div>
-            <div className="mt-4">
+            <div style={{ marginTop: "1rem" }}>
               <input
                 type="text"
                 name="linkedin"
                 placeholder="LinkedIn URL"
                 value={formData.linkedin}
                 onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full"
+                style={{
+                  border: "1px solid #1f96b7",
+                  borderRadius: "0.5rem",
+                  padding: "0.75rem",
+                  width: "100%",
+                }}
               />
             </div>
-            {/* GitHub URL input */}
-            <div className="mt-4">
+
+            <div style={{ marginTop: "1rem" }}>
               <input
                 type="text"
                 name="github"
                 placeholder="GitHub URL"
                 value={formData.github}
                 onChange={handleChange}
-                className="border border-gray-300 rounded-md p-2 w-full"
+                style={{
+                  border: "1px solid #1f96b7",
+                  borderRadius: "0.5rem",
+                  padding: "0.75rem",
+                  width: "100%",
+                }}
               />
             </div>
             <button
               onClick={handleSubmit}
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              style={{
+                marginTop: "1.5rem",
+                backgroundColor: "#1f96b7",
+                color: "white",
+                padding: "0.75rem 1.5rem",
+                borderRadius: "0.5rem",
+                cursor: "pointer",
+                transition: "background-color 0.3s ease",
+              }}
             >
               Submit
             </button>
           </div>
-          {showConfetti && <Confetti width={width} height={height} opacity={20} />}
+          {showConfetti && (
+            <Confetti width={width} height={height} opacity={20} />
+          )}
         </div>
       )}
     </>

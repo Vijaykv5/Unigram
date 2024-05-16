@@ -7,10 +7,10 @@ const Internship = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3002/internships");
+        const response = await fetch("http://localhost:3002/admin/posts");
         if (response.ok) {
           const data = await response.json();
-          setPosts(data); // Update state with fetched data
+          setPosts(data);
           console.log(data);
         } else {
           console.error("Failed to fetch posts");
@@ -22,6 +22,13 @@ const Internship = () => {
 
     fetchPosts();
   }, []);
+
+  // Function to chunk the posts into groups of 3
+  const chunkPosts = (arr, size) => {
+    return Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+      arr.slice(i * size, i * size + size)
+    );
+  };
 
   return (
     <div>
@@ -37,16 +44,44 @@ const Internship = () => {
         </div>
         <div className="text-center">
           <h2 className="text-xl font-semibold mb-4">Internships</h2>
-          <ul className="mx-auto max-w-md">
-            {posts.map((post, index) => (
-              <li
-                key={index}
-                className="mb-2 p-4 bg-white shadow-md rounded-md"
-              >
-                {post.content}
-              </li>
-            ))}
-          </ul>
+          {/* Chunking posts into groups of 3 */}
+          {chunkPosts(posts, 3).map((group, index) => (
+            <div key={index} className="flex  animate-wiggle flex-wrap justify-center">
+              {group.map((post, index) => (
+                <div
+                  key={index}
+                  className="mb-6 p-4 bg-white shadow-md rounded-md mr-4"
+                  style={{ minWidth: "400px", maxWidth: "450px" }}
+                >
+                  <h3 className="text-lg font-semibold mb-2">{post.heading}</h3>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold w-36">Description:</span>{" "}
+                    {post.description}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold">Company:</span>{" "}
+                    {post.company}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold">Skills:</span>{" "}
+                    {post.skills.join(", ")}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold">preferred year:</span>{" "}
+                    {post.preferredyear}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold">Duration:</span>{" "}
+                    {post.duration}
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold">Stipend:</span>{" "}
+                    {post.stipend}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </div>
