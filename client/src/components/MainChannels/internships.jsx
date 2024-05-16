@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 
-const Internship = () => {
+const Internships = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -88,4 +88,4 @@ const Internship = () => {
   );
 };
 
-export default Internship;
+export default Internships;
