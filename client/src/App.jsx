@@ -8,10 +8,9 @@ import Profile from "./components/profile/Profile";
 import Model from "./components/Model";
 import AdminLogin from "./components/admin/AdminLogin";
 import Dashboard from "./components/admin/Dashboard";
-
 import Landing from "./Landing";
 import TrendingPage from "./components/TrendingPage";
-import Internships from "./components/MainChannels/Internships";
+import Internships from "./components/mainchannels/internships"
 
 function App() {
   return (
