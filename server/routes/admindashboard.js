@@ -3,7 +3,6 @@ const router = express.Router();
 const UserAllDetails = require("../models/userDetails");
 
 router.get("/admin/users", async (req, res) => {
-  console.log("hello");
 
   try {
     const totalUsers = await UserAllDetails.find().countDocuments();
