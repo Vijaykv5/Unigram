@@ -35,6 +35,7 @@ app.use(adminPosts);
 // app.use(UserDetails);
 app.use(adminDashboard);
 app.use(adminchannel);
+app.use(require("./routes/channel"));
 
 
 const PORT = 3002;
