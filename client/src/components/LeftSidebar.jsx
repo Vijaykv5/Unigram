@@ -12,7 +12,6 @@ const LeftSidebar = () => {
       </div>
       <div className="mt-2">
         <Tech />
-        hi
       </div>
     </div>
   );

@@ -48,15 +48,16 @@ const getChannels = async () => {
     <div className=" bg-black mx-auto ">
       <div className="h-screen text-white  font-semibold pt-1 p-12">
         {channels.map((channel, index) => (
-          <div
+          <Link
+            to={`/channel/${channel}`} // Navigate to `/channel/:channel`
             key={index}
-            className={`py-2 px-4  m-4 cursor-pointer hover:bg-gray-700 ${
+            className={`py-2 px-4 flex m-4 cursor-pointer hover:bg-gray-700 ${
               channel === selectedChannel ? "bg-gray-700" : ""
             }`}
             onClick={() => handleChannelSelect(channel)}
           >
             {channel}
-          </div>
+          </Link>
         ))}
       </div>
       <div>{newChannel}</div>

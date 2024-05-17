@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { BiUpvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import Trending from "./trending/Trending";
+import RightSidebar from "./RightSidebar";
 
 const TrendingPage = () => {
   const channel = useParams().channel;
@@ -24,11 +25,18 @@ const TrendingPage = () => {
   }, [channel]);
 
   const handleLike = (postId) => {
-    // Implement like functionality here
+    const updatedPosts = posts.map((post) => {
+      if (post._id === postId) {
+        return { ...post, likes: post.likes + 1 };
+      }
+      return post;
+    });
+    setPosts(updatedPosts);
   };
 
   const handleUnlike = (postId) => {
-    // Implement unlike functionality here
+    
+   
   };
 
   return (
@@ -36,11 +44,15 @@ const TrendingPage = () => {
       {/* <div>
         <Trending />
       </div> */}
-
+      <div className="ml-[80%]">
+        <RightSidebar />
+      </div>
+     
       {posts.map((post, index) => (
+        
         <div
           key={post._id}
-          className="post m-20  w-[40%] bg-white hover:bg-gray-50 rounded-lg shadow-md mb-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+          className="post m-40  w-[40%] bg-white hover:bg-gray-50 rounded-lg shadow-md mb-4 transition-all duration-300 ease-in-out transform hover:-translate-y-1"
         >
           <Link to={`/profile/${post.userid}`} className="block">
             <div className="post-header flex items-center p-4">

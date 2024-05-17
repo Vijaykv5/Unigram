@@ -11,6 +11,7 @@ import Dashboard from "./components/admin/Dashboard";
 import Landing from "./Landing";
 import TrendingPage from "./components/TrendingPage";
 import Internships from "./components/mainchannels/Internships";
+import Channel from "./components/channels/Channel";
 
 function App() {
   return (
@@ -24,9 +25,11 @@ function App() {
         <Route path="/usersList" element={<Sample2 />} />
         <Route path="/profile/:userId" element={<Profile />} />
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/internships" element={<Internships/>} />
+        <Route path="/internships" element={<Internships />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/:channel" element={<TrendingPage />} />
+       <Route path="/channel/:channel" element={<Channel />}/> 
+      
 
         {/* <Route path="/rankings"  element={<Rankings/>} /> */}
       </Routes>

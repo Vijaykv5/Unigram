@@ -7,6 +7,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigateTo = useNavigate();
+
   const isLoggedIn = async (e) => {
     console.log(email, password);
     e.preventDefault();
@@ -23,31 +24,26 @@ const Login = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            navigateTo("/home/" + data.userDetails.user_id);
-            localStorage.setItem("user", JSON.stringify(data.userDetails));
-          } else {
-            console.error(data.message);
-          }
-        })
-        .catch((error) => {
-          console.error("Error logging in:", error);
-        });
+      });
+      const data = await response.json();
+      if (data.success) {
+        navigateTo("/home/" + data.userDetails.user_id);
+        localStorage.setItem("user", JSON.stringify(data.userDetails));
+      } else {
+        setError(data.message);
+      }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error logging in:", error);
     }
   };
 
   return (
     <div className="bg-theme">
       <div className="flex flex-col items-center justify-center min-h-screen px-4 space-y-4 md:px-10">
-        <div className="w-full max-w-[400px] space-y-4">
+        <div className="w-full max-w-[400px] space-y-4 bg-white rounded-lg shadow-lg p-8">
           <div className="space-y-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-black">
+            <h1 className="text-3xl font-bold title text-primary">Login</h1>
+            <p className="text-black welcome-message">
               Welcome back! Enter your information to login
             </p>
           </div>
@@ -55,13 +51,13 @@ const Login = () => {
             <div className="space-y-4">
               <div className="space-y-2">
                 <label
-                  className="text-sm font-medium leading-none"
+                  className="text-sm font-medium leading-none text-primary"
                   htmlFor="email"
                 >
                   Email
                 </label>
                 <input
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="flex h-10 w-full rounded-md border border-primary bg-background px-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring focus:border-primary"
                   id="email"
                   placeholder="m@example.com"
                   type="email"
@@ -72,13 +68,13 @@ const Login = () => {
               </div>
               <div className="space-y-2">
                 <label
-                  className="text-sm font-medium leading-none"
+                  className="text-sm font-medium leading-none text-primary"
                   htmlFor="password"
                 >
                   Password
                 </label>
                 <input
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="flex h-10 w-full rounded-md border border-primary bg-background px-3 py-2 text-sm placeholder-gray-500 focus:outline-none focus:ring focus:border-primary"
                   id="password"
                   type="password"
                   placeholder="********"
@@ -89,14 +85,14 @@ const Login = () => {
               </div>
               {error && <p className="text-red-500">{error}</p>}
               <button
-                className="inline-flex items-center   bg-black text-white justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full"
+                className="bg-blue-400 text-white rounded-md text-sm font-medium py-2 px-4 transition duration-300 ease-in-out hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50"
                 type="submit"
               >
                 Log In
               </button>
-              <div className="mt-4 text-center text-sm">
+              <div className="mt-4 text-center text-sm " >
                 New to Unigram?
-                <a className="underline" href="/signup">
+                <a className="text-primary underline" href="/signup">
                   Sign Up
                 </a>
               </div>
