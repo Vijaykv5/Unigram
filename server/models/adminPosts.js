@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { link } = require("../routes/channel");
 
 const AdminPostsSchema = new mongoose.Schema({
   heading: {
@@ -27,6 +28,11 @@ const AdminPostsSchema = new mongoose.Schema({
   },
   stipend: {
     type: String,
+  },
+  link : {
+    type: String,
+    required: true,
+  
   },
   active: {
     type: Boolean,

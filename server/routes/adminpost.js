@@ -12,6 +12,7 @@ Router.post("/admin/posts", async (req, res) => {
     preferredyear,
     duration,
     stipend,
+    link,
   } = req.body;
 
   try {
@@ -23,7 +24,8 @@ Router.post("/admin/posts", async (req, res) => {
       preferredyear,
       duration,
       stipend,
-      active : true,
+      link,
+      active: true,
     });
 
     await newPost.save();
@@ -37,13 +39,14 @@ Router.post("/admin/posts", async (req, res) => {
 // Route handler for fetching admin posts
 Router.get("/admin/posts", async (req, res) => {
   try {
-    const posts = await AdminPost.find();
+    //sort in decreasing order
+    const posts = await AdminPost.find().sort({ _id: -1 });
+
     res.status(200).json(posts); // Sending posts as JSON
   } catch (err) {
     console.error("Error fetching admin posts:", err);
     res.status(500).json({ error: "Server error" });
   }
 });
-
 
 module.exports = Router;

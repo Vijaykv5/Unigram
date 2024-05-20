@@ -42,11 +42,15 @@ const Internships = () => {
             experience and kickstart your career!
           </p>
         </div>
+
         <div className="text-center">
-          <h2 className="text-xl font-semibold mb-4">Internships</h2>
+          {/* <h2 className="text-xl font-semibold mb-4">Internships</h2> */}
           {/* Chunking posts into groups of 3 */}
           {chunkPosts(posts, 3).map((group, index) => (
-            <div key={index} className="flex  animate-wiggle flex-wrap justify-center">
+            <div
+              key={index}
+              className="flex  animate-wiggle flex-wrap justify-center"
+            >
               {group.map((post, index) => (
                 <div
                   key={index}
@@ -77,6 +81,14 @@ const Internships = () => {
                   <p className="text-sm text-gray-600">
                     <span className="font-semibold">Stipend:</span>{" "}
                     {post.stipend}
+                  </p>
+                  <p className="mt-3">
+                    <a
+                      href={post.link}
+                      className="text-sm font-semibold rounded-md bg-black text-white px-4 py-2"
+                    >
+                      Apply
+                    </a>
                   </p>
                 </div>
               ))}

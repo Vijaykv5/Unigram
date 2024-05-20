@@ -17,6 +17,7 @@ const PostContent = () => {
   const [preferredyear, setPreferredyear] = useState("");
   const [duration, setDuration] = useState("");
   const [stipend, setStipend] = useState("");
+  const [link, setLink]=useState("")
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +29,9 @@ const PostContent = () => {
       !skills.trim() ||
       !preferredyear.trim() ||
       !duration.trim() ||
-      !stipend.trim()
+      !stipend.trim() ||
+      !link.trim()
+      
     ) {
       toast.error("Please fill all fields");
       return;
@@ -48,6 +51,7 @@ const PostContent = () => {
           preferredyear,
           duration,
           stipend,
+          link
         }),
       });
 
@@ -62,6 +66,7 @@ const PostContent = () => {
         setPreferredyear("");
         setDuration("");
         setStipend("");
+        setLink("")
       } else {
         const errorMessage = await response.text();
         console.error("Error:", errorMessage || response.statusText);
@@ -76,7 +81,9 @@ const PostContent = () => {
   return (
     <div>
       <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-        <h2 className="text-4xl font-bold mb-4 text-white">Create New Internship Opportunities</h2>
+        <h2 className="text-4xl font-bold mb-4 text-white">
+          Create New Internship Opportunities
+        </h2>
       </div>
 
       {/* <div className="mt-6 text-black text-4xl px-6 pt-6 font-bold">
@@ -190,6 +197,20 @@ const PostContent = () => {
               className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               value={stipend}
               onChange={(e) => setStipend(e.target.value)}
+              required
+            />
+          </div>
+        </div>
+        <div className="mb-2">
+          <label className="text-sm font-semibold mb-1 block">Link</label>
+          <div className="flex items-center">
+            <FaMoneyBillAlt className="text-gray-500 mr-2" />
+            <input
+              type="text"
+              placeholder="Apply link"
+              className="w-full border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
               required
             />
           </div>
