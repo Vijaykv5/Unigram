@@ -10,7 +10,9 @@ import AdminLogin from "./components/admin/AdminLogin";
 import Dashboard from "./components/admin/Dashboard";
 import Landing from "./Landing";
 import TrendingPage from "./components/TrendingPage";
+
 // import Internships from "./components/mainchannels/Internships";
+
 import Channel from "./components/channels/Channel";
 
 function App() {
