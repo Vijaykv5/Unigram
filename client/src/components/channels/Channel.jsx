@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import LeftSidebar from "../LeftSidebar";
 import Navbar from "../Navbar";
 import { FiSend } from "react-icons/fi";
-
+import { Base_URL } from "../../utils/constants";
 const Channel = () => {
   const { channel } = useParams();
   const [message, setMessage] = useState("");
@@ -14,7 +14,7 @@ const Channel = () => {
     const fetchMessages = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3002/channel/${channel}`
+          `${Base_URL}/channel/${channel}`
         );
         if (response.ok) {
           const data = await response.json();
@@ -58,7 +58,7 @@ const Channel = () => {
       };
 
       // Call your API
-      const response = await fetch("http://localhost:3002/channel", {
+      const response = await fetch(`${Base_URL}/channel`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

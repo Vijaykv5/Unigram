@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { MdEmail } from "react-icons/md";
+import { Base_URL } from "../../../utils/constants";
 
 
 const UsersContent = () => {
@@ -9,7 +10,7 @@ const UsersContent = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:3002/admin/users");
+        const response = await fetch(`${Base_URL}/admin/users`);
         const data = await response.json();
         setTotalUsers(data.totalUsers);
         setUsers(data.users);

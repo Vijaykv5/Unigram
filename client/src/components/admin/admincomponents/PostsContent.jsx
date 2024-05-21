@@ -8,6 +8,7 @@ import {
   FaClock,
   FaMoneyBillAlt,
 } from "react-icons/fa";
+import { Base_URL } from "../../../utils/constants";
 
 const PostContent = () => {
   const [heading, setHeading] = useState("");
@@ -38,7 +39,7 @@ const PostContent = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3002/admin/posts", {
+      const response = await fetch(`${Base_URL}/admin/posts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +52,7 @@ const PostContent = () => {
           preferredyear,
           duration,
           stipend,
-          link
+          link,
         }),
       });
 

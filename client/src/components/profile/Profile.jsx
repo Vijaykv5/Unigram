@@ -5,6 +5,7 @@ import { FaRegComment } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
+import { Base_URL } from "../../utils/constants";
 
 
 
@@ -16,7 +17,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/profile/${userId}`);
+        const response = await fetch(`${Base_URL}/profile/${userId}`);
         if (response.ok) {
           const data = await response.json();
           setUserPosts(data);

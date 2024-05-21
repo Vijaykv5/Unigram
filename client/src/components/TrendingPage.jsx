@@ -4,6 +4,7 @@ import { BiUpvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import Trending from "./trending/Trending";
 import RightSidebar from "./RightSidebar";
+import { Base_URL } from "../utils/constants";
 
 const TrendingPage = () => {
   const channel = useParams().channel;
@@ -12,7 +13,7 @@ const TrendingPage = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/posts/${channel}`);
+        const response = await fetch(`${Base_URL}/posts/${channel}`);
         const data = await response.json();
         setPosts(data);
         console.log("Posts:", data);

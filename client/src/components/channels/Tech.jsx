@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Base_URL } from "../../utils/constants";
 
 
 const Tech = () => {
@@ -18,7 +19,7 @@ const Tech = () => {
 
 const getChannels = async () => {
   try {
-    const response = await fetch("http://localhost:3002/admin/channel");
+    const response = await fetch(`${Base_URL}/admin/channel`);
     if (response.ok) {
       const data = await response.json();
       if (data && Array.isArray(data)) {

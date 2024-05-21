@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast, Toaster } from "react-hot-toast";
+import { Base_URL } from "../../../utils/constants";
 
 
 
@@ -17,7 +18,7 @@ const MessagesContent = () => {
 
   const getChannels = async () => {
     try {
-      const response = await fetch("http://localhost:3002/admin/channel");
+      const response = await fetch(`${Base_URL}/admin/channel`);
       if (response.ok) {
         const data = await response.json();
         if (data && Array.isArray(data)) {
@@ -42,7 +43,7 @@ const MessagesContent = () => {
   const handleAddChannel = async () => {
     if (newChannel.trim() && !channels.includes(newChannel.trim())) {
       try {
-        const response = await fetch("http://localhost:3002/admin/channel", {
+        const response = await fetch(`${Base_URL}/admin/channel`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -68,7 +69,7 @@ const MessagesContent = () => {
 
   const handleDeleteChannel = async (channel) => {
     try {
-      const response = await fetch("http://localhost:3002/admin/channel", {
+      const response = await fetch(`${Base_URL}/admin/channel`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

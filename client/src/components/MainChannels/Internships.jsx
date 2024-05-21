@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
+import { Base_URL } from "../../utils/constants";
 
 const Internships = () => {
   const [posts, setPosts] = useState([]);
@@ -7,7 +8,7 @@ const Internships = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch("http://localhost:3002/admin/posts");
+        const response = await fetch(`${Base_URL}/admin/posts`);
         if (response.ok) {
           const data = await response.json();
           setPosts(data);

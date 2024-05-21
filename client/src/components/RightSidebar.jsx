@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Trending from "./trending/Trending";
 import { useNavigate } from "react-router-dom";
+import { Base_URL } from "../utils/constants";
 
 const RightSidebar = () => {
   const navigateTo = useNavigate();
@@ -10,7 +11,7 @@ const RightSidebar = () => {
   useEffect(() => {
     const fetchPostsAndExtractKeywords = async () => {
       try {
-        const response = await fetch("http://localhost:3002/home");
+        const response = await fetch(`${Base_URL}/home`);
         const posts = await response.json();
 
         let allKeywords = [];
@@ -73,7 +74,7 @@ const RightSidebar = () => {
   }, []);
 
   const sendChannelToBackend = (channel) => {
-    fetch("http://localhost:3002/selected-channel", {
+    fetch(`${Base_URL}/selected-channel`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

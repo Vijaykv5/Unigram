@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useWindowSize from "react-use/lib/useWindowSize";
 import Confetti from "react-confetti";
+import { Base_URL } from "../../utils/constants";
 
 const Modal = ({ showModal, handleCloseModal, user }) => {
   const { width, height } = useWindowSize();
@@ -72,7 +73,7 @@ const Modal = ({ showModal, handleCloseModal, user }) => {
 
     try {
       console.log("Form Data:", formData);
-      const response = await fetch("http://localhost:3002/home", {
+      const response = await fetch(`${Base_URL}/home`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

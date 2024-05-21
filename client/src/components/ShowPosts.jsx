@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Base_URL } from '../utils/constants';
 
 const ShowPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -7,7 +8,7 @@ const ShowPosts = () => {
 
     const fetchPosts = async () => {
         try {
-          const response = await fetch("http://localhost:3002/Home", {
+          const response = await fetch(`${Base_URL}/Home`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

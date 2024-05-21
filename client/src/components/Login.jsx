@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Base_URL } from "../utils/constants";
 
 const Login = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -18,7 +19,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3002/login", {
+      const response = await fetch(`${Base_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

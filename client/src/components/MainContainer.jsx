@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TagField, useTagInput } from "./Tags/Keyword";
 import { Toaster, toast } from "react-hot-toast";
+import { Base_URL } from "../utils/constants";
 
 const MainContainer = () => {
   const { tags, handleAddTag, handleRemoveTag } = useTagInput();
@@ -72,7 +73,7 @@ const MainContainer = () => {
     console.log(formData);
 
     try {
-      const response = await fetch("http://localhost:3002/home/:id ", {
+      const response = await fetch(`${Base_URL}/home/:id `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

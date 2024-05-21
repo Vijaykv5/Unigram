@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "./Signup.css";
+import { Base_URL } from "../utils/constants";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -18,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
     console.log("form data", formData);
     try {
-      const response = await fetch("http://localhost:3002/signup", {
+      const response = await fetch(`${Base_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

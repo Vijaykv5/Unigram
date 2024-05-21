@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
+import { Base_URL } from "../../utils/constants";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
@@ -13,7 +14,7 @@ const AdminLogin = () => {
     setLoading(true); // Set loading state to true when form is submitted
 
     try {
-      const response = await fetch("http://localhost:3002/admin", {
+      const response = await fetch(`${Base_URL}/admin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

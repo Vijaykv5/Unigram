@@ -3,8 +3,9 @@ import { BiUpvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa";
 import { FaShareFromSquare } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-
 import { toast , Toaster } from "react-hot-toast";
+import { Base_URL } from "../utils/constants";
+import {Frontend_URL} from "../utils/constants";
 
 const FeedPost = ({ post, updatePostLikes, updatePostComments }) => {
   const user = JSON.parse(localStorage.getItem("user_details"));
@@ -77,7 +78,7 @@ const FeedPost = ({ post, updatePostLikes, updatePostComments }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:3002/Home/${post._id}/comment`,
+        `${Base_URL}/Home/${post._id}/comment`,
         {
           method: "PUT",
           headers: {
@@ -89,7 +90,7 @@ const FeedPost = ({ post, updatePostLikes, updatePostComments }) => {
             time: new Date().toLocaleTimeString(),
             day: new Date().toLocaleDateString(),
             profileImage: user.image,
-            profilelink: "http://localhost:5173/profile/"+`${user.user_id}`,
+            profilelink: `${Frontend_URL}`+"/profile/"+`${user.user_id}`,
           }),
         }
       );
@@ -226,7 +227,7 @@ const Feed = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("http://localhost:3002/Home", {
+      const response = await fetch(`${Base_URL}/Home`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -245,7 +246,7 @@ const Feed = () => {
 
   const updatePostLikes = async (postId, newLikes) => {
     try {
-      const response = await fetch(`http://localhost:3002/Home/${postId}`, {
+      const response = await fetch(`${Base_URL}/Home/${postId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -263,7 +264,7 @@ const Feed = () => {
   const updatePostComments = async (postId, newComments) => {
     try {
       const response = await fetch(
-        `http://localhost:3002/Home/${postId}/comment`,
+        `${Base_URL}/Home/${postId}/comment`,
         {
           method: "PUT",
           headers: {
