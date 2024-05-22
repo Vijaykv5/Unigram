@@ -11,17 +11,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="text-white py-14 px-14 flex justify-between    items-center">
+    <nav className="text-white max-sm:py-5 max-sm:px-5 py-14 px-14 flex justify-between items-center">
       <div>
-        <span className="text-5xl font-bold text-black">UNI</span>
-        <span className="text-5xl font-bold text-[#7BB7E3]">GRAM</span>
+        <span className="text-5xl max-sm:text-3xl font-bold text-black">UNI</span>
+        <span className="text-5xl max-sm:text-3xl font-bold text-[#7BB7E3]">GRAM</span>
       </div>
       <div className="flex space-x-32 text-black">
         {user && (
           <>
             <Link
               to="/home/:id"
-              className={`text-xl font-semibold ${
+              className={`sm:text-xl font-semibold ${
                 location.pathname === "/home/:id" ? "underline" : ""
               }`}
             >
@@ -30,7 +30,7 @@ const Navbar = () => {
 
             <Link
               to="/internships"
-              className={`text-xl font-semibold ${
+              className={`sm:text-xl font-semibold ${
                 location.pathname === "/internships" ? "underline" : ""
               }`}
             >
@@ -94,13 +94,13 @@ const Navbar = () => {
           </div>
         ) : (
           <>
-            <div className="flex gap-5">
-              <Link to="/signup" className="text-xl ">
+            <div className="flex max-sm:gap-2 gap-5 items-baseline">
+              <Link to="/signup" className="sm:text-xl">
                 <div className="py-2 px-4 bg-theme rounded-md text-white">
                   Sign Up
                 </div>
               </Link>
-              <Link to="/login" className="text-xl text-black">
+              <Link to="/login" className="sm:text-xl text-black">
                 <div className="py-2 px-4 border border-slate-950 rounded-md ">
                   Sign In
                 </div>
